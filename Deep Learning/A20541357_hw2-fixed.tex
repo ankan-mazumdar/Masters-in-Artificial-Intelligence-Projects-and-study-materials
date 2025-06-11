@@ -1,0 +1,528 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage[margin=1in]{geometry}
+\usepackage{tcolorbox}
+\usepackage{bm}
+\usepackage{graphicx}
+
+
+\newcommand{\mydivider}{\vspace{1em}\hrule\vspace{1em}}
+\newcommand{\mypart}[2]{\noindent{\textbf{[#1] point(s) --- #2:}}}
+\newcommand{\programming}{\textcolor{blue}{This is a programming exercise. See \texttt{hw2.ipynb}}}
+
+
+
+%%% BEGIN MACROS
+% type your macros here
+%%% END MACROS
+
+
+\title{CS 577 --- Deep Learning --- Homework 2}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+\textbf{Read these instructions carefully}:
+\begin{itemize}
+  \item
+In the \LaTeX~source code, type your answer in between
+``\verb|%%% BEGIN ANSWER|'' and
+``\verb|%%% END ANSWER|''.
+        For advanced \LaTeX users,
+        you can use your custom macros if you wish
+        by placing them
+        between
+``\verb|%%% BEGIN MACROS|'' and
+``\verb|%%% END MACROS|'' in the header.
+        Do not modify anything else.
+
+
+
+
+  \item Turn in both your \verb|.tex| file and the generated \verb|.pdf| file.
+\end{itemize}
+
+
+
+\section{Conditional Probability}
+\mypart{3}{part a}
+This exercise is designed to help you develop intuition for the concept of  conditional probability by ``creating one from scratch''.
+
+In mathematics, a \emph{function} takes an input, let's call it \(x\), to exactly one output, let's call it \(y\).
+For example, if
+\({w} =
+1/2
+\)
+and \(b = 1/2\), then the function
+\begin{equation}
+  \label{equation:function-with-description}
+  y=
+\underbrace{f({x})}_{\mbox{(name of the function)}} = \underbrace{w x + b}_{\mbox{(what the function actually is)}}
+\end{equation}
+assigns every input \(x\) to exactly one real number, namely \(wx + b\).
+In this case, we say the  dependency of \(y\) on \(x\), i.e., the input-output relationship, is \emph{deterministic}.
+Note in naming the function, we could have used \(g\) or \(h\) instead of \(f\).
+There is nothing special about the letter ``\(f\)'' other than tradition (and also that the word ``function'' starts with that letter).
+
+In the real world, it is often the case that
+the dependency of \(y\) on \(x\) has a degree of uncertainty.
+This notion is what \emph{conditional probability} aims to capture:
+\begin{equation*}
+  \underbrace{
+    p(y\mid {x})
+  }_{\mbox{(name of the conditional probability)}}
+  =
+  \underbrace{
+    \qquad \qquad
+  }_{\mbox{(what the conditional probability actually is)}}
+  (\mbox{Intentionally blank})
+\end{equation*}
+Just like for functions, there is nothing special about the letter \(p\); we could've wrote \(q(y\mid \mathbf{x})\) or \(r(y \mid \mathbf{x})\).
+Now, why did we leave the right-hand-side blank? We've learned how to ``create'' functions since grade school mathematics. But most of us never learned the notation for how to do the same for conditional probability.
+Let's do that here.
+
+Let \(n > 0\) be an integer.
+Consider
+\[y = wx+b + \epsilon\] where \(w\) and \(b\) are non-random numbers and \(x\) is the input, but \(\epsilon\) is random and defined via the following algorithm:
+\begin{enumerate}
+  \item Initialize \(\epsilon \gets 0\)
+
+  \item For \(t = 1,\dots, n\), do:
+        \begin{enumerate}[1.]
+          \item Flip a fair coin
+
+          \item If coin comes up head, then \(\epsilon \gets \epsilon + 1\)
+
+          \item Else \(\epsilon \gets \epsilon - 1\)
+        \end{enumerate}
+
+  \item Return \(\epsilon/\sqrt{n}\).
+\end{enumerate}
+The above procedure defines a dependency of \(y\) on \(x\) that is random, and hence the input-output relationship is governed by a conditional probability.
+Let's call the conditional probability
+\[
+  \mathcal{S}(y; wx+b, n)
+\]
+(the curly ``S'' is \verb|\mathcal{S}|).
+When \(n=2\), we have
+\[
+  p(y\mid x) =
+  \mathcal{S}(y; wx+b, 2)
+  =
+  \begin{cases}
+    1/4
+    &:
+      \mbox{if }
+      y =
+   wx+b + \frac{2}{\sqrt{2}},
+      \\
+    1/2 &:
+      \mbox{if }
+          y = wx+b \\
+    1/4
+    &:
+      \mbox{if }
+      y=
+   wx+b - \frac{2}{\sqrt{2}},
+    \\
+    0 &: \mbox{otherwise}.
+  \end{cases}
+\]
+To see there, first note that there are \(4\) possible outcomes for the coin flip.
+There is only one outcome in which both coins come up heads, then
+\(
+y=
+   wx+b + \frac{2}{\sqrt{2}}
+   \).
+   Thus, the probability is \(1/4\). The same logic applies to
+   the
+\(
+y=
+   wx+b - \frac{2}{\sqrt{2}}
+   \) case.
+   Now, there are two outcomes that results in
+   \(
+    y = wx+b \): one coin comes up head while the other comes up tail. Hence the probability of this case is \(2/4 = 1/2\).
+    It is impossible for \(y\) to equal to any other values.
+
+    The exercise: calculate
+\(  p(y\mid x) =
+  \mathcal{S}(y; wx+b, 3)
+\). \emph{Hint: introduce a notation for denoting outcomes of the coin flips.}
+
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+
+\textbf{1:}
+Each flip can result in either a head (H) or a tail (T). For \( n = 3 \), there are \( 2^3 = 8 \) possible outcomes:
+\[
+\text{HHH, HHT, HTH, HTT, THH, THT, TTH, TTT}.
+\]
+
+\textbf{2: }
+The steps for determining \( \epsilon \) is:
+- Start with \( \epsilon = 0 \),
+- Add \( +1 \) for each head,
+- Subtract \( -1 \) for each tail,
+- Return \( \epsilon / \sqrt{3} \).
+
+Let’s find \( \epsilon \) for each outcome:
+\[
+\begin{aligned}
+    \text{HHH} &: \epsilon = 3 \quad \Rightarrow \quad \frac{3}{\sqrt{3}} = \sqrt{3}, \\
+    \text{HHT} &: \epsilon = 1 \quad \Rightarrow \quad \frac{1}{\sqrt{3}} = \frac{1}{\sqrt{3}}, \\
+    \text{HTH} &: \epsilon = 1 \quad \Rightarrow \quad \frac{1}{\sqrt{3}} = \frac{1}{\sqrt{3}}, \\
+    \text{HTT} &: \epsilon = -1 \quad \Rightarrow \quad \frac{-1}{\sqrt{3}} = -\frac{1}{\sqrt{3}}, \\
+    \text{THH} &: \epsilon = 1 \quad \Rightarrow \quad \frac{1}{\sqrt{3}} = \frac{1}{\sqrt{3}}, \\
+    \text{THT} &: \epsilon = -1 \quad \Rightarrow \quad \frac{-1}{\sqrt{3}} = -\frac{1}{\sqrt{3}}, \\
+    \text{TTH} &: \epsilon = -1 \quad \Rightarrow \quad \frac{-1}{\sqrt{3}} = -\frac{1}{\sqrt{3}}, \\
+    \text{TTT} &: \epsilon = -3 \quad \Rightarrow \quad \frac{-3}{\sqrt{3}} = -\sqrt{3}.
+\end{aligned}
+\]
+
+\textbf{}
+Using the formula \( y = wx + b + \epsilon \), we get the possible values of \( y \) based on \( \epsilon \):
+\[
+\begin{aligned}
+    y &= wx + b + \sqrt{3}, \\
+    y &= wx + b + \frac{1}{\sqrt{3}}, \\
+    y &= wx + b - \frac{1}{\sqrt{3}}, \\
+    y &= wx + b - \sqrt{3}.
+\end{aligned}
+\]
+
+\textbf{4:}
+There are 8 possible outcomes from the coin flips, and the probabilities are:
+\[
+\begin{aligned}
+    \mathbb{P}(y = wx + b + \sqrt{3}) &= \frac{1}{8} \quad \text{(HHH)}, \\
+    \mathbb{P}(y = wx + b + \frac{1}{\sqrt{3}}) &= \frac{3}{8} \quad \text{(HHT, HTH, THH)}, \\
+    \mathbb{P}(y = wx + b - \frac{1}{\sqrt{3}}) &= \frac{3}{8} \quad \text{(HTT, THT, TTH)}, \\
+    \mathbb{P}(y = wx + b - \sqrt{3}) &= \frac{1}{8} \quad \text{(TTT)}.
+\end{aligned}
+\]
+
+\textbf{Final Answer:}
+Thus, the conditional probability \( p(y | x) = \mathcal{S}(y; wx + b, 3) \) is:
+\[
+p(y | x) = \mathcal{S}(y; wx + b, 3) =
+\begin{cases}
+    \frac{1}{8}, & \text{if } y = wx + b + \sqrt{3}, \\
+    \frac{3}{8}, & \text{if } y = wx + b + \frac{1}{\sqrt{3}}, \\
+    \frac{3}{8}, & \text{if } y = wx + b - \frac{1}{\sqrt{3}}, \\
+    \frac{1}{8}, & \text{if } y = wx + b - \sqrt{3}, \\
+    0, & \text{otherwise}.
+\end{cases}
+\]
+%%% END ANSWER
+
+
+\end{tcolorbox}
+
+
+\mydivider
+
+\mypart{2}{part b} \programming
+
+\mydivider
+
+\mypart{2}{part c} \programming
+
+\section{The Gaussian distribution}
+
+
+
+\mypart{1}{part a} Consider linear regression when the data live in the \(2\)-dimensional space. That is, the data vectors \(\mathbf{x}^{(i)} \in \mathbb{R}^{2}\) are \(2\)-dimensional vectors, and the labels \(y \in \mathbb{R}\) are numbers.
+
+
+
+In lecture 2, we saw that for linear regression, the relationship between the sample (input) \(\mathbf{x}\) and the label (output) \(y\) is governed by
+\begin{equation}
+  \label{equation:conditional-distribution-for-linear-regression}
+  p(y\mid \mathbf{x})
+  =
+  \mathcal{N}( y ;
+  \mathbf{w}^{\top} \mathbf{x} +b , \, \sigma^{2}
+  )
+\end{equation}
+
+where
+  \(\mathcal{N}(\, \cdot \, ; \mu,\sigma^{2})
+  \)
+  is the probability density function for a Gaussian random variable with mean \(\mu\) and variance \(\sigma^{2}\).
+The formula for
+  \(\mathcal{N}(\, \cdot \, ; \mu,\sigma^{2})
+  \)
+  is given by
+\[
+  \mathcal{N}(z; \mu,\sigma^{2}) :=
+\frac{1}{\sqrt{2\pi \sigma^{2}}}
+\exp\left(
+-\frac{1}{2} \frac{(z- \mu)^{2}}{\sigma^{2}}
+\right).
+\]
+
+Let
+\(\sigma = 1/\sqrt{2}\),
+\(\mathbf{w} =
+\begin{bmatrix}
+0 \\ 1
+\end{bmatrix}
+\)
+and \(b = 3\).
+Compute \(p(y\mid \mathbf{x})\) when \(\mathbf{x} =
+\begin{bmatrix}
+  1 \\ -2
+\end{bmatrix}
+\).
+The only unknown variable in your solution should be \(y\).
+Type your answer in a single line of \LaTeX~code using fewer than 50 characters.
+You don't need to show your work.
+
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+$p(y \mid x) = \frac{1}{\sqrt{\pi}} \exp\left( -(y - 1)^2 \right).
+$
+%%% END ANSWER
+
+
+\end{tcolorbox}
+
+
+\mydivider
+
+\mypart{1}{part b}
+Plug in \(y = 1\) and \(y= -1/2\) into your answer above.
+Compute the numerical value of \(\frac{p(1\mid \mathbf{x})} {p(-1/2\mid \mathbf{x})}\) and write the result below rounded to three decimal places (i.e., like 1.234)
+
+
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+$\frac{p(1 \mid x)}{p\left(-\frac{1}{2} \mid x\right)} \approx 9.559
+
+%%% END ANSWER
+
+\end{tcolorbox}
+
+
+
+\mydivider
+
+\mypart{1}{part c} \programming
+
+\mydivider
+
+\mypart{2}{part d}
+``\(p(y\mid \mathbf{x})= \mathcal{N}(y; \mathbf{w}^{\top} \mathbf{x} +b,\sigma^{2})\)''
+is what is known as a probability \emph{density}:
+\(p(y\mid \mathbf{x})\) is not the probability of observing exactly \(y\), but rather the probability
+ of observing a value \emph{near} \(y\).
+The number in the output cell of part c should be similar to the number in your answer in part b.
+ Explain this why these two numbers are similar.
+
+
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+
+The probability density function (PDF) $p(y \mid x) $ is like a guide that tells us how likely it is to see a value close to y. In part c, when we look at the ratio n1/n2, we're figuring out how often we see values of y within certain ranges. In part b, the ratio $ p(1 \mid x) / p(-1/2 \mid x) $ is about comparing how likely different specific values of y are.
+
+Both of these ratios are similar because they both give us an idea of how likely it is to see certain values of y given x. The PDF gives us a theoretical view of this likelihood, while the empirical frequency shows us the actual data we’ve observed. In essence, both are ways to understand the same thing: how likely different values of y are when x is known.
+
+%%% END ANSWER
+
+\end{tcolorbox}
+
+\section{A nonlinear regression problem}
+\mypart{3}{part a}
+Consider samples \(x \in \mathbb{R}\) and labels \(y \in \mathbb{R}\).
+Let \(\bm{\theta} =
+\begin{bmatrix}
+  w_{1} \\ w_{2}
+\end{bmatrix}
+\)
+and let \(f({x} ; \bm{\theta})
+=
+\sin(w_{1}x) + \cos(w_{2} x)
+\).
+Calculate the gradient \(\nabla_{\bm{\theta}} J(\bm{\theta})\) of the function
+\[
+  J(\bm{\theta})
+  =
+  J\left(
+  \begin{bmatrix}
+    w_{1}\\w_{2}
+  \end{bmatrix}
+\right  )^{2}
+  =
+  \frac{1}{N}
+  \sum_{i=1}^{N} (y^{(i)} - f(\mathbf{x}^{(i)} ; \bm{\theta}))^{2}.
+\]
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+
+
+Lets compute the gradient $\nabla_\theta J(\theta)$ of the function 
+
+\[
+J(\theta) = \frac{1}{N} \sum_{i=1}^{N} \left( y^{(i)} - f(x^{(i)}; \theta) \right)^2,
+\]
+where 
+\[
+f(x; \theta) = \sin(w_1 x) + \cos(w_2 x),
+\]
+and $\theta = \begin{bmatrix} w_1 \\ w_2 \end{bmatrix}$.
+
+\[\]
+
+1. \textbf{}
+Partial Derivatives of \(f(x; \theta)\) with respect to \(w_1\) and \(w_2\):
+\[
+\frac{\partial f(x; \theta)}{\partial w_1} = \frac{\partial}{\partial w_1} \left( \sin(w_1 x) + \cos(w_2 x) \right) = x \cos(w_1 x).
+\]
+
+\[
+\frac{\partial f(x; \theta)}{\partial w_2} = \frac{\partial}{\partial w_2} \left( \sin(w_1 x) + \cos(w_2 x) \right) = -x \sin(w_2 x).
+\]
+
+2. \textbf{}
+Applying the chain rule to get the gradient (\nabla_\theta J(\theta)):
+
+\[
+\nabla_\theta J(\theta) = \begin{bmatrix} \frac{\partial J(\theta)}{\partial w_1} \\ \frac{\partial J(\theta)}{\partial w_2} \end{bmatrix}.
+\]
+
+For the loss  \(J(\theta)\), we have:
+
+\[
+\frac{\partial J(\theta)}{\partial w_1} = -\frac{2}{N} \sum_{i=1}^{N} \left( y^{(i)} - f(x^{(i)}; \theta) \right) \frac{\partial f(x^{(i)}; \theta)}{\partial w_1},
+\]
+\[
+\frac{\partial J(\theta)}{\partial w_2} = -\frac{2}{N} \sum_{i=1}^{N} \left( y^{(i)} - f(x^{(i)}; \theta) \right) \frac{\partial f(x^{(i)}; \theta)}{\partial w_2}.
+\]
+
+On Substituting the partial derivatives:
+
+\[
+\frac{\partial J(\theta)}{\partial w_1} = -\frac{2}{N} \sum_{i=1}^{N} \left( y^{(i)} - f(x^{(i)}; \theta) \right) x^{(i)} \cos(w_1 x^{(i)}),
+\]
+\[
+\frac{\partial J(\theta)}{\partial w_2} = -\frac{2}{N} \sum_{i=1}^{N} \left( y^{(i)} - f(x^{(i)}; \theta) \right) (-x^{(i)} \sin(w_2 x^{(i)})).
+\]
+
+This implies to:
+
+\[
+\frac{\partial J(\theta)}{\partial w_1} = -\frac{2}{N} \sum_{i=1}^{N} \left( y^{(i)} - f(x^{(i)}; \theta) \right) x^{(i)} \cos(w_1 x^{(i)}),
+\]
+\[
+\frac{\partial J(\theta)}{\partial w_2} = \frac{2}{N} \sum_{i=1}^{N} \left( y^{(i)} - f(x^{(i)}; \theta) \right) x^{(i)} \sin(w_2 x^{(i)}).
+\]
+
+3. \textbf{}
+The gradient \(\nabla_\theta J(\theta)\) is:
+
+\[
+\nabla_\theta J(\theta) = \begin{bmatrix} -\frac{2}{N} \sum_{i=1}^{N} \left( y^{(i)} - f(x^{(i)}; \theta) \right) x^{(i)} \cos(w_1 x^{(i)}) \\ \frac{2}{N} \sum_{i=1}^{N} \left( y^{(i)} - f(x^{(i)}; \theta) \right) x^{(i)} \sin(w_2 x^{(i)}) \end{bmatrix}.
+\]
+
+
+
+%%% END ANSWER
+
+\end{tcolorbox}
+\mydivider
+
+\mypart{1}{part b} \programming
+
+\mydivider
+
+\mypart{4}{part c}
+Run gradient descent for \(100\) steps with constant step size \(=1/4\). Compare two different initialization: initialization ``A''
+\[
+w_{1} = -2.5,\quad
+w_{2} = 3.56
+\]
+and initialization ``B''
+\[
+w_{1} = -2.5,\quad
+w_{2} = 3.57.
+\]
+Answer the following questions:
+\begin{enumerate}
+  \item Which initialization led to better performance in terms of the training error?
+
+  \item Is one of the converged final parameter (nearly) optimal? How do you know?
+\end{enumerate}
+
+\textcolor{red}{For this part, only your response below will be graded. We will not take into consideration of the contents in the python notebook.}
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+
+1. \textbf{Which initialization led to better performance in terms of the training error?} \\
+\[\]
+Initialization B performed better, achieving a much lower final MSE of 0.0075 compared to Initialization A's final MSE of 1.0072. This indicates a more effective convergence.
+\[\]
+2. \textbf{Is one of the converged final parameters (nearly) optimal? How do you know?} \\
+\[\]
+Yes, the final parameters from Initialization B appear nearly optimal. The MSE is very close to zero, suggesting that the model parameters have converged to a point minimizing the training error effectively.
+
+%%% END ANSWER
+
+\end{tcolorbox}
+
+\mydivider
+
+\mypart{10 bonus}{part d} Explain in as much quantitative detail as possible why these two initialization led to different results. If you wish to use figures, you may use
+
+\verb|\includegraphics[width=0.5\textwidth]{myfigure.png}|
+
+Do not submit the figures separately.
+
+\textcolor{red}{For this part, only your response below will be graded. We will not take into consideration of the contents in the python notebook.}
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+\textbf
+
+\textbf{Quantitative Explanation for Different Results:}
+
+   1. Initialization A converged to a final MSE of 1.0072, whereas Initialization B achieved a much lower final MSE of 0.0075. This indicates that Initialization B found a more optimal set of parameters.
+
+   2. Between iterations 10 and 20, Initialization B showed a sharp decrease in MSE from 1.1119 to 0.1855, while Initialization A's MSE only decreased marginally from 1.1419 to 1.0073 in the same range.
+
+   3. The steeper descent in Initialization B suggests it started closer to a region with a more favorable gradient, leading to faster convergence. Initialization A plateaued earlier, showing less improvement over iterations.
+
+   4. By iteration 25, Initialization B had already reached an MSE of 0.0075, while Initialization A was still at 1.0072, indicating that B found a better local minimum much faster.
+\[\]
+\includegraphics[width=\linewidth]{image1.png}
+
+
+%%% END ANSWER
+\end{tcolorbox}
+
+
+\end{document}
