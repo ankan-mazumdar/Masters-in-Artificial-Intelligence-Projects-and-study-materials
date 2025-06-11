@@ -1,0 +1,169 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage[margin=1in]{geometry}
+\usepackage{tcolorbox}
+\usepackage{bm}
+\usepackage{graphicx}
+
+
+\newcommand{\mydivider}{\vspace{1em}\hrule\vspace{1em}}
+\newcommand{\mypart}[2]{\noindent{\textbf{[#1] point(s) --- #2:}}}
+\newcommand{\programming}{\textcolor{blue}{This is a programming exercise. See \texttt{hw4.ipynb}}}
+
+
+
+%%% BEGIN MACROS
+% type your macros here
+%%% END MACROS
+
+
+\title{CS 577 --- Deep Learning --- Homework 4}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+\textbf{Read these instructions carefully}:
+\begin{itemize}
+  \item
+In the \LaTeX~source code, type your answer in between
+``\verb|%%% BEGIN ANSWER|'' and
+``\verb|%%% END ANSWER|''.
+        For advanced \LaTeX users,
+        you can use your custom macros if you wish
+        by placing them
+        between
+``\verb|%%% BEGIN MACROS|'' and
+``\verb|%%% END MACROS|'' in the header.
+        Do not modify anything else.
+
+
+
+
+  \item Turn in both your \verb|.tex| file and the generated \verb|.pdf| file.
+\end{itemize}
+
+
+
+\section{Backpropagation}
+
+\mypart{5}{part a}
+
+Answer the question in Section 1.3.7 of
+\texttt{backpropagation.pdf}:
+How can we calculate
+\(\frac{\partial f}{\partial z_{4}}(x,y)
+\)
+given
+correct value of
+\(
+\frac{\partial f}{\partial z_{5}}(x,y)
+\)?
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+On by applying chain rule on  \(\frac{\partial f}{\partial z_4}\), we get ,
+
+\[
+\frac{\partial f}{\partial z_4} = \frac{\partial f}{\partial z_5} \cdot \frac{\partial z_5}{\partial z_4}
+\]
+
+Given,
+\[
+z_5 = \exp(z_4)
+\]
+
+The partial derivative of \(z_5\) with respect to \(z_4\) is :
+
+\[
+\frac{\partial z_5}{\partial z_4} = \frac{\partial }{\partial z_4}(\exp(z_4)) = \exp(z_4) = z_5
+\]
+
+
+\(\frac{\partial z_5}{\partial z_4} = z_5\), we substituting this into the chain rule of \(\frac{\partial f}{\partial z_4} expression:
+
+\[
+\frac{\partial f}{\partial z_4} = \frac{\partial f}{\partial z_5} \cdot z_5
+\]
+
+
+#### 
+
+The final expression for \(\frac{\partial f}{\partial z_4}\) is:
+
+\[
+\boxed{\frac{\partial f}{\partial z_4} = \frac{\partial f}{\partial z_5} \cdot z_5}
+\]
+
+%%% END ANSWER
+
+\end{tcolorbox}
+
+\mypart{5}{part b}
+
+Answer the question in Section 1.3.8 of \texttt{backpropagation.pdf}: What is currently stored in \texttt{z3.grad} right before \texttt{z4.\_backward()} is called?
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+\texttt{z3.grad} is calculated as,
+\[
+\frac{\partial f}{\partial z_3}(x, y) = \frac{\partial f}{\partial z_8}(x, y) \frac{\partial z_8}{\partial z_3} = \frac{\partial f}{\partial z_8}(x, y) \frac{\partial (z_7 * z_3)}{\partial z_3} =  \underbrace{z_7\frac{\partial f}{\partial z_8}(x, y)}_{\text{term 1}} + \underbrace{\frac{\partial f}{\partial z_8}(x, y) \frac{\partial z_7}{\partial z_3}}_{\text{term 2}}
+\]
+
+Before \texttt{z4.backward()} is called:
+
+\[
+z8 = z7 \times z3
+\]
+ the gradient for both \( z7 \) and \( z3 \). When backpropagating through \( z8 \), the gradient of the loss (or output) with respect to \( z3 \) is calculated using the product rule:
+
+\[
+\frac{\partial f}{\partial z3}(x, y) = \frac{\partial f}{\partial z8}(x, y) \times \frac{\partial z8}{\partial z3} = \frac{\partial f}{\partial z8}(x, y) \times z7
+\]
+
+
+Before \texttt{z4.backward()} is called, only term 1 is calculated.\[\]
+Right before \texttt{z4.backward()} is called, \( z3.grad \) has the first term,  \( z7 \times \frac{\partial f}{\partial z8} \). The second term, which depends on the relationship between \( z3 \) and \( z7 \), will only be finalized once backpropagation reaches \( z4 \).
+
+\textbf{Final value of \( z3.grad \):}
+
+Initially, the gradient in \( z3.grad \) is:
+
+\[
+z3.grad = z7 \times \frac{\partial f}{\partial z8}(x, y)
+\]
+
+Since \( z8 \) is equal to \( f(x, y) \) (the output), and the gradient of the loss with respect to \( z8 \) is initialized to 1. If we change z8 = f(x,y) by a tiny amount, then f(x,y) will change by that
+same amount (tautology). Thus,:
+
+\[
+\frac{\partial f}{\partial z8}(x, y) = 1
+\]
+
+So, before \texttt{z4.backward()} is called, the value of \( z3.grad \) is:
+
+\[
+z3.grad = z7
+\]
+
+%%% END ANSWER
+
+\end{tcolorbox}
+
+
+
+\section{Gradient descent with \texttt{ag.Scalar}}
+
+\mypart{10}{part a}  \programming
+
+\section{Transformer with \texttt{ag.Scalar}}
+\mypart{Bonus 20}{part a}  \programming
+
+\end{document}
