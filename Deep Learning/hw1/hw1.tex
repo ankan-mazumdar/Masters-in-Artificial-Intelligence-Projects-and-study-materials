@@ -1,0 +1,457 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[margin=1in]{geometry}
+\usepackage{tcolorbox}
+\usepackage{bm}
+
+\newcommand{\mydivider}{\vspace{1em}\hrule\vspace{1em}}
+
+
+
+%%% BEGIN MACROS
+% type your macros here
+%%% END MACROS
+
+
+\title{CS 577 --- Deep Learning --- Homework 1}
+\author{}
+\date{}
+
+\begin{document}
+
+\maketitle
+\textbf{Read these instructions carefully}:
+\begin{itemize}
+  \item
+In the \LaTeX~source code, type your answer in between
+``\verb|%%% BEGIN ANSWER|'' and
+``\verb|%%% END ANSWER|''.
+        For advanced \LaTeX users,
+        you can use your custom macros if you wish
+        by placing them
+        between
+``\verb|%%% BEGIN MACROS|'' and
+``\verb|%%% END MACROS|'' in the header.
+        Do not modify anything else.
+
+
+  \item
+There is a PDF file \verb|latex_symbols.pdf| which lists \LaTeX~symbols that you will need later.
+
+
+  \item
+The first section ``Introduction to Latex (not graded)'' is a tutorial. \textbf{It is not graded}. Feel free to skip it.
+
+  \item The second section titled ``\LaTeX~Problems'' \textbf{will be graded}. You will recreate content from the slides in Lecture 1. You will receive full credit as long as your answer is sufficiently similar visually.
+
+  \item The third section ``Perceptron Problem'' \textbf{will be graded}.
+
+  \item When typing mathematics, you can use either the inline mode or display mode (see below). It is up to you. Please make the choice that results in good readability.
+
+  \item Turn in both your \verb|.tex| file and the generated \verb|.pdf| file.
+\end{itemize}
+
+
+
+\section{Introduction to Latex (not graded)}
+
+
+\textbf{[0] points --- inline mode:}
+Mathematics goes inside a pair of single dollar sign like this: ``\verb|$...$|''.
+For example,
+``\verb|$\pi \approx 3.14$|'' renders as
+``$\pi \approx 3.14$''
+
+ Write the formula for the circumference $C$ of the circle with radius $r$
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+% type your answer here
+%%% END ANSWER
+
+
+\end{tcolorbox}
+
+
+\mydivider
+\noindent\textbf{[0] points --- display mode:} Mathematics goes inside a pair of double dollar signs for display mode like this: ``\verb|$$...$$|''. For example,
+``\verb|$$\sin(\theta)^2 + \cos(\theta)^2 = 1$$|'' renders as
+
+$$\sin(\theta)^2 + \cos(\theta)^2 = 1$$
+
+ Type in display mode a function $f$ of $x$ and $y$ defined (you should use colon ``:'' followed by an equal sign, i.e., $:=$, for function definition) by $\sin(x)^2$ plus $\cos(y)^2$.
+
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+% type your answer here
+%%% END ANSWER
+
+\end{tcolorbox}
+
+
+
+
+\mydivider
+\noindent\textbf{[0] points --- superscript:} You saw that the caret symbol \verb|^| is for superscript. Now, try taking $x$ to the $1/3$ power by directly typing \verb|x^| followed by \verb|1/3|...
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+% type your answer here
+%%% END ANSWER
+
+\end{tcolorbox}
+
+If you did this exactly, you probably noticed that it's not quite right. Let's fix that by surrounding the \verb|1/3| with \verb|{...}|.
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+% type your answer here
+%%% END ANSWER
+
+\end{tcolorbox}
+
+
+
+\mydivider
+
+\noindent\textbf{[0] points --- subscript:} Subscripts in LaTeX are created using the underscore symbol \verb|_|. For example, typing \verb|x_i| will produce $x_i$. Now, try typing $x$ with the subscript ``$100$''.
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+% type your answer here
+%%% END ANSWER
+
+\end{tcolorbox}
+
+
+\mydivider
+
+\noindent\textbf{[0] points --- summation notation:} The command \verb|\sum| is used to produce the summation symbol in LaTeX. For example, \verb|\sum_{...}^{...} | produces $\sum_{...}^{...}$. Now, write the sum of $1$ squared, $2$ squared, $\ldots$, $n$ squared using summation notation.
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+% type your answer here
+%%% END ANSWER
+
+\end{tcolorbox}
+
+\mydivider
+
+
+\noindent\textbf{[0] points --- blackboard font:} The set of real numbers is typically written using the blackboard font in LaTeX. To use this font, surround the symbol with \verb|\mathbb{...}|. Now, write the set of real numbers (capital $R$ in blackboard font).
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+% type your answer here
+%%% END ANSWER
+
+\end{tcolorbox}
+
+\mydivider
+
+\noindent\textbf{[0] points --- minimization notation:} Minimization in LaTeX is similar to summation, except there is no superscript. Now, write the notation for ``minimization of $x$ squared where $x$ is in the set of the reals''. The symbol for ``belongs'' is \verb|\in|.
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+% type your answer here
+%%% END ANSWER
+
+\end{tcolorbox}
+
+\mydivider
+
+\noindent\textbf{[0] points --- bold symbols:} To type a bold symbol in LaTeX, use the command \verb|\mathbf{...}|, where the \verb|...| is replaced with your symbol.  Now, write $X$  (uppercase) in bold.
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+% type your answer here
+%%% END ANSWER
+
+\end{tcolorbox}
+
+For bolding Greek symbols, you need to use \verb|\bm{...}| instead of \verb|\mathbf{...}|.  Write ``theta'' in bold.
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+% type your answer here
+%%% END ANSWER
+
+\end{tcolorbox}
+
+\mydivider
+
+\noindent\textbf{[0] points --- uppercase Greek letters:} To type an uppercase Greek letter in LaTeX, simply write the name of the letter with an initial capital letter, like \verb|\Theta| for $\Theta$. Note that not all Greek letters have an uppercase version in LaTeX (e.g., there is no capital "alpha"). Now, type the uppercase version of delta.
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+% type your answer here
+%%% END ANSWER
+
+\end{tcolorbox}
+
+
+\mydivider
+
+\noindent\textbf{[0] points --- gradient symbol:} Other commands or symbols in LaTeX can also be subscripted or superscripted. The symbol for the gradient is \verb|\nabla|. Now, type the symbol for the partial derivative with respect to bold $\mathbf{x}$ (just the "nabla" and the "x" part).
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+% type your answer here
+%%% END ANSWER
+
+\end{tcolorbox}
+
+
+\mydivider
+
+\noindent\textbf{[0] points --- fractions:} Fractions in LaTeX are written using the command \verb|\frac{numerator}{denominator}|. Now, write Newton's law of universal gravitation:
+$F$ is the force of gravity, $G$ is the gravitational constant, $m_1$ and $m_2$ are the masses of the objects, and $r$ is the distance between the objects.
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+% type your answer here
+%%% END ANSWER
+
+\end{tcolorbox}
+
+
+\subsection{Linear algebra}
+
+\noindent\textbf{[0] points --- matrices:} You can write matrices in LaTeX using the \verb|bmatrix| environment. For example, the matrix
+\[
+\begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix}
+\]
+is written as:
+
+\begin{verbatim}
+\begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix}
+\end{verbatim}
+
+Now, write down the formula for the inverse of this matrix.
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+% type your answer here
+%%% END ANSWER
+
+\end{tcolorbox}
+
+
+
+\mydivider
+
+\noindent\textbf{[0] points --- big matrices:} You can write a big matrix in LaTeX using dots for representing a sequence of elements. Here's an example of a large matrix:
+
+\[
+\begin{bmatrix}
+x_{11} & \cdots & x_{1N} \\
+\vdots & \ddots & \vdots \\
+x_{N1} & \cdots & x_{NN}
+\end{bmatrix}
+\]
+
+In this example, \verb|\cdots| represents horizontal (centered) dots, \verb|\vdots| represents vertical dots, and \verb|\ddots| represents diagonal dots.
+
+Now, create a column vector with $x_1, \ldots, x_N$ and a row vector with $x_1, \ldots, x_N$. Hint: You only need \verb|&| but not \verb|\\| for the row vector.
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+% type your answer here
+%%% END ANSWER
+
+\end{tcolorbox}
+
+
+\subsection{Lists}
+
+
+\noindent\textbf{[0] points --- nested lists:} In LaTeX, you can create a nested bulleted list using the \verb|itemize| environment like this:
+
+\begin{verbatim}
+\begin{itemize}
+    \item A
+    \item B
+    \begin{itemize}
+        \item X
+        \item Y
+        \item Z
+    \end{itemize}
+    \item C
+\end{itemize}
+\end{verbatim}
+
+This will produce the following nested list:
+
+\begin{itemize}
+    \item A
+    \item B
+    \begin{itemize}
+        \item X
+        \item Y
+        \item Z
+    \end{itemize}
+    \item C
+\end{itemize}
+
+To create a numbered list, use the \verb|enumerate| environment instead of \verb|itemize|.
+Nested lists can be a hacky way to write pseudo algorithms (with code indentation) in LaTeX. Now, write the pseudocode to compute the $n$-th Fibonacci number using nested numbered list.
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+% type your answer here
+%%% END ANSWER
+
+\end{tcolorbox}
+
+
+
+
+\section{\LaTeX~Problems}
+
+Note: The following problems refer to slides from Lecture 01.
+
+\vspace{1em}
+
+\noindent\textbf{[2] points --- Empirical risk minimization:} Write the empirical risk minimization (ERM)
+on slide number ``27/73''  (ignore my handwritten notes) of . Consult the \verb|latex_symbols.pdf| page 4 for the matrix transpose symbol.
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+% type your answer here
+%%% END ANSWER
+
+\end{tcolorbox}
+
+\mydivider
+
+\noindent\textbf{[2] points --- Gradient:} Write the gradient
+on slide number ``29/73''  (ignore my handwritten notes).
+Consult the
+\verb|latex_symbols.pdf| page 4 for the partial derivative symbol.
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+% type your answer here
+%%% END ANSWER
+
+\end{tcolorbox}
+
+\mydivider
+
+
+\noindent\textbf{[3] points --- Stochastic gradient descent algorithm:} Write the
+content on slide number ``42/73''  (ignore my handwritten notes) starting from ``Let...''. (Ignore the slide numbers in your answer.)
+The curly brackets are \verb|\{...\}|
+and the left arrow is \verb|\gets|.
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+% type your answer here
+%%% END ANSWER
+
+\end{tcolorbox}
+
+
+\mydivider
+
+
+\noindent\textbf{[3] points --- Perceptron algorithm:} Write the
+content inside the ``Perceptron update'' blue box on slide number ``53/73''  (ignore my handwritten notes).
+(Just the pseudocode. Ignore the title text of the box.)
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+% type your answer here
+%%% END ANSWER
+
+\end{tcolorbox}
+
+
+
+
+\section{Perceptron Problem}
+\noindent\textbf{[10] points --- Perceptron calculation:} In this problem, you will run the Perceptron update for the following dataset for \(T = 8\) iterations. It is possible for the Perceptron to converge before all \(T\) iterations. In that case, you may declare that ``the perceptron converges after this iteration'' and stop.
+\begin{itemize}
+  \item $\mathbf{x}^{(1)} = \begin{bmatrix} 1 \\ 0 \end{bmatrix}$ \quad ``east'',
+        \quad $y^{(1)} = +1$
+    \item $\mathbf{x}^{(2)} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$ \quad ``northeast'',
+        \quad $y^{(2)} = +1$
+    \item $\mathbf{x}^{(3)} = \begin{bmatrix} 0 \\ 2 \end{bmatrix}$ \quad ``north'',
+        \quad $y^{(3)} = -1$
+    \item $\mathbf{x}^{(4)} = \begin{bmatrix} -1 \\ 1 \end{bmatrix}$ \quad ``northwest'',
+        \quad $y^{(4)} = -1$
+    \item $\mathbf{x}^{(5)} = \begin{bmatrix} -1 \\ 0 \end{bmatrix}$ \quad ``west'',
+        \quad $y^{(5)} = -1$
+    \item $\mathbf{x}^{(6)} = \begin{bmatrix} -1 \\ -1 \end{bmatrix}$ \quad ``southwest'',
+        \quad $y^{(6)} = -1$
+    \item $\mathbf{x}^{(7)} = \begin{bmatrix} 0 \\ -1 \end{bmatrix}$ \quad ``south'',
+        \quad $y^{(7)} = +1$
+    \item $\mathbf{x}^{(8)} = \begin{bmatrix} 1 \\ -1 \end{bmatrix}$ \quad ``southeast'',
+        \quad $y^{(8)} = +1$
+\end{itemize}
+Write your answer in the box below. Show all your calculations.
+Go through each iteration thoroughly.
+Make sure that you address
+\begin{itemize}
+  \item
+What is $\mathbf{w}$ at the beginning/end of an iteration?
+  \item What is the calculation that goes into checking the ``If/Else'' statement?
+
+\end{itemize}
+
+\begin{tcolorbox}
+\textbf{Answer: }
+
+%%% BEGIN ANSWER
+% type your answer here
+%%% END ANSWER
+
+\end{tcolorbox}
+\end{document}
